@@ -22,12 +22,25 @@ public class Snake extends Entity {
     }
 
     public void move() {
-        // TODO: Implement the move
-        // 1. Update the current possition with dx,dy;
-        // 2. Update the entire tails
+        // Update the entire tails
+        int tailSize = tails.size();
+
+        for (int i = tailSize - 1; i > 0; i--) {
+            SnakeTail currentTail = tails.get(i);
+            SnakeTail nextTail = tails.get(i - 1);
+            currentTail.setX(nextTail.getX());
+            currentTail.setY(nextTail.getY());
+        }
+
+        SnakeTail headMost = tails.get(0);
+        headMost.setX(getX());
+        headMost.setY(getY());
+        // Update the current possition with dx,dy;
+        this.setX(this.getX() + dx);
+        this.setY(this.getY() + dy);
     }
 
-    public List<SnakeTail> getTrails() {
+    public List<SnakeTail> getTails() {
         return this.tails;
     }
 }
