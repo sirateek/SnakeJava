@@ -40,6 +40,26 @@ public class Snake extends Entity {
         this.setY(this.getY() + dy);
     }
 
+    public void moveLeft() {
+        dx = -1;
+        dy = 0;
+    }
+
+    public void moveRight() {
+        dx = 1;
+        dy = 0;
+    }
+
+    public void moveUp() {
+        dx = 0;
+        dy = -1;
+    }
+
+    public void moveDown() {
+        dx = 0;
+        dy = 1;
+    }
+
     public List<SnakeTail> getTails() {
         return this.tails;
     }
