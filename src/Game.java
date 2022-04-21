@@ -1,11 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Observable;
-import java.util.Observer;
 
 public class Game extends JFrame {
-    public static int GAME_SPEED = 1000;
+    public static int GAME_SPEED = 700;
 
     private GridUI gridUI;
     private int boardSize = 30;
