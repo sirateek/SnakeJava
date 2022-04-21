@@ -5,9 +5,12 @@ import java.awt.event.*;
 public class Game extends JFrame {
     private GridUI gridUI;
     private int boardSize = 30;
+    private Snake snake;
 
     public Game() {
+        int middle = boardSize / 2;
         gridUI = new GridUI();
+        snake = new Snake(middle, middle);
         add(gridUI);
         pack();
     }
@@ -23,6 +26,24 @@ public class Game extends JFrame {
 
         public GridUI() {
             setPreferredSize(new Dimension(boardSize * CELL_PIXEL_SIZE, (boardSize + 2) * CELL_PIXEL_SIZE));
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            super.paint(g);
+            // Paint the Snake;
+            g.setColor(Color.red);
+            g.fillRect(snake.getX() * CELL_PIXEL_SIZE, snake.getY() * CELL_PIXEL_SIZE, CELL_PIXEL_SIZE,
+                    CELL_PIXEL_SIZE);
+
+            // Paint snake's tails
+            g.setColor(Color.gray);
+            for (Entity entity : snake.getTrails()) {
+                g.fillRect(entity.getX() * CELL_PIXEL_SIZE, entity.getY() * CELL_PIXEL_SIZE, CELL_PIXEL_SIZE,
+                        CELL_PIXEL_SIZE);
+            }
+
+            repaint();
         }
 
         public void paintCell(Graphics g, int row, int col) {

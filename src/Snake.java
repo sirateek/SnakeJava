@@ -16,7 +16,7 @@ public class Snake extends Entity {
 
         // Start with tails from the configured value;
         for (int i = 1; i < INITIAL_TAIL_SIZE + 1; i++) {
-            tails.add(new SnakeTail(x, y - i));
+            tails.add(new SnakeTail(x - i, y));
         }
 
     }
@@ -25,5 +25,9 @@ public class Snake extends Entity {
         // TODO: Implement the move
         // 1. Update the current possition with dx,dy;
         // 2. Update the entire tails
+    }
+
+    public List<SnakeTail> getTrails() {
+        return this.tails;
     }
 }
