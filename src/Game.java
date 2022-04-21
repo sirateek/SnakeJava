@@ -53,6 +53,12 @@ public class Game extends JFrame {
         @Override
         public void paint(Graphics g) {
             super.paint(g);
+            for (int i = 0; i < boardSize; i++) {
+                for (int j = 0; j < boardSize; j++) {
+                    paintCell(g, i, j);
+                }
+            }
+
             // Paint the Snake;
             g.setColor(Color.red);
             g.fillRect(snake.getX() * CELL_PIXEL_SIZE, snake.getY() * CELL_PIXEL_SIZE, CELL_PIXEL_SIZE,
