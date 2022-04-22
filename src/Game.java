@@ -145,6 +145,16 @@ public class Game extends JFrame {
             setAlive(false);
             JOptionPane.showMessageDialog(Game.this, "Loose!", "Kaboom!", JOptionPane.WARNING_MESSAGE);
         }
+        if (snake.getTails().size() > 3) {
+            int headX = snake.getX();
+            int headY = snake.getY();
+            for (int i=3; i<snake.getTails().size(); i++) {
+                if (headX == snake.getTails().get(i).getX() && headY == snake.getTails().get(i).getY()) {
+                    setAlive(false);
+                    JOptionPane.showMessageDialog(Game.this, "Loose!", "Kaboom!", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
     }
 
     public void setAlive(boolean alive) {
