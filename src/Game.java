@@ -8,6 +8,7 @@ public class Game extends JFrame {
     private GridUI gridUI;
     private int boardSize = 30;
     private Snake snake;
+    private Food food;
     private Thread gameThread;
     private boolean isAlive = true;
 
@@ -15,12 +16,14 @@ public class Game extends JFrame {
         int middle = boardSize / 2;
         gridUI = new GridUI();
         snake = new Snake(middle, middle);
+        food = new Food(boardSize);
         gameThread = new Thread() {
             @Override
             public void run() {
                 while (isAlive) {
                     snake.move();
                     gridUI.repaint();
+                    checkHit(snake, food);
                     try {
                         Thread.sleep(GAME_SPEED);
                     } catch (InterruptedException e) {
@@ -86,7 +89,7 @@ public class Game extends JFrame {
                     paintCell(g, i, j);
                 }
             }
-
+            paintFood(g);
             // Paint the Snake;
             g.setColor(Color.red);
             g.fillRect(snake.getX() * CELL_PIXEL_SIZE, snake.getY() * CELL_PIXEL_SIZE, CELL_PIXEL_SIZE,
@@ -111,8 +114,30 @@ public class Game extends JFrame {
             g.fillRect(x + 1, y + 1, CELL_PIXEL_SIZE - 2, CELL_PIXEL_SIZE - 2);
 
         }
+
+        public void paintFood(Graphics g) {
+            int row = food.getRow() * CELL_PIXEL_SIZE;
+            int col = food.getCol() * CELL_PIXEL_SIZE;
+
+            g.setColor(Color.black);
+            g.fillRect(row, col, CELL_PIXEL_SIZE, CELL_PIXEL_SIZE);
+        }
     }
 
+    public void checkHit(Snake snake, Food food) {
+        if (snake.getX() == food.getRow() && snake.getY() == food.getCol()) {
+            food.generate();
+        }
+        if (snake.getX() < 0 || snake.getX() > 29 || snake.getY() < 0 || snake.getY() > 29) {
+            setAlive(false);
+            JOptionPane.showMessageDialog(Game.this, "Loose!", "Kaboom!", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public void setAlive(boolean alive) {
+        this.isAlive = alive;
+    }
+    
     public static void main(String[] args) {
         Game game = new Game();
         game.start();
