@@ -41,11 +41,41 @@ public class Game extends JFrame {
         gameThread.start();
     }
 
-    class GridUI extends JPanel {
-        public static int CELL_PIXEL_SIZE = 30;
+    class GridUI extends JPanel{
+        public static final int CELL_PIXEL_SIZE = 30;
 
         public GridUI() {
             setPreferredSize(new Dimension(boardSize * CELL_PIXEL_SIZE, (boardSize + 2) * CELL_PIXEL_SIZE));
+             Game.this.addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    int keycode = e.getKeyCode();
+                    switch(keycode) {
+                        case KeyEvent.VK_UP:
+                            snake.moveUp();
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            snake.moveDown();
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                            snake.moveRight();
+                            break;
+                        case KeyEvent.VK_LEFT:
+                            snake.moveLeft();
+                            break;
+                    }
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+
+                }
+            });
         }
 
         @Override
