@@ -28,3 +28,7 @@ hs_err_pid*
 
 # Mac File
 *.DS_Store
+
+#intelliJ idea
+*.idea
+*.iml
