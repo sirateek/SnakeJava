@@ -60,6 +60,19 @@ public class Snake extends Entity {
         dy = 1;
     }
 
+    public int getDx() {
+        return dx;
+    }
+
+    public int getDy() {
+        return dy;
+    }
+
+    public void grow() {
+        int tailSize = tails.size();
+        tails.add(new SnakeTail(tails.get(tailSize-1).getX(), tails.get(tailSize-1).getY()));
+    }
+
     public List<SnakeTail> getTails() {
         return this.tails;
     }

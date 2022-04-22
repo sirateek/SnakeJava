@@ -60,15 +60,27 @@ public class Game extends JFrame {
                     int keycode = e.getKeyCode();
                     switch(keycode) {
                         case KeyEvent.VK_UP:
+                            if (snake.getDy() == 1) {
+                                break;
+                            }
                             snake.moveUp();
                             break;
                         case KeyEvent.VK_DOWN:
+                            if (snake.getDy() == -1) {
+                                break;
+                            }
                             snake.moveDown();
                             break;
                         case KeyEvent.VK_RIGHT:
+                            if (snake.getDx() == -1) {
+                                break;
+                            }
                             snake.moveRight();
                             break;
                         case KeyEvent.VK_LEFT:
+                            if (snake.getDx() == 1) {
+                                break;
+                            }
                             snake.moveLeft();
                             break;
                     }
@@ -126,6 +138,7 @@ public class Game extends JFrame {
 
     public void checkHit(Snake snake, Food food) {
         if (snake.getX() == food.getRow() && snake.getY() == food.getCol()) {
+            snake.grow();
             food.generate();
         }
         if (snake.getX() < 0 || snake.getX() > 29 || snake.getY() < 0 || snake.getY() > 29) {
@@ -137,7 +150,7 @@ public class Game extends JFrame {
     public void setAlive(boolean alive) {
         this.isAlive = alive;
     }
-    
+
     public static void main(String[] args) {
         Game game = new Game();
         game.start();
