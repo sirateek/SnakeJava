@@ -1,37 +1,29 @@
 import java.util.Random;
 
-public class Food {
+public class Food extends Entity{
     Random rand = new Random();
-    private boolean eaten;
     private int boardSize;
-    private int row;
-    private int col;
+    private int x;
+    private int y;
 
     public Food(int boardSize) {
         this.boardSize = boardSize;
-        this.row = rand.nextInt(boardSize);
-        this.col = rand.nextInt(boardSize);
-        eaten = true;
+        x = rand.nextInt(boardSize);
+        y = rand.nextInt(boardSize);
     }
 
     public void generate() {
-        row = rand.nextInt(boardSize);
-        col = rand.nextInt(boardSize);
+        x = rand.nextInt(boardSize);
+        y = rand.nextInt(boardSize);
     }
 
-    public void setEaten() {
-        this.eaten = !this.eaten;
+    @Override
+    public int getX() {
+        return x;
     }
 
-    public boolean isEaten() {
-        return eaten;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
+    @Override
+    public int getY() {
+        return y;
     }
 }

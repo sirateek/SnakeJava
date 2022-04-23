@@ -128,8 +128,8 @@ public class Game extends JFrame {
         }
 
         public void paintFood(Graphics g) {
-            int row = food.getRow() * CELL_PIXEL_SIZE;
-            int col = food.getCol() * CELL_PIXEL_SIZE;
+            int row = food.getX() * CELL_PIXEL_SIZE;
+            int col = food.getY() * CELL_PIXEL_SIZE;
 
             g.setColor(Color.black);
             g.fillRect(row, col, CELL_PIXEL_SIZE, CELL_PIXEL_SIZE);
@@ -137,7 +137,7 @@ public class Game extends JFrame {
     }
 
     public void checkHit(Snake snake, Food food) {
-        if (snake.getX() == food.getRow() && snake.getY() == food.getCol()) {
+        if (snake.getX() == food.getX() && snake.getY() == food.getY()) {
             snake.grow();
             food.generate();
         }
